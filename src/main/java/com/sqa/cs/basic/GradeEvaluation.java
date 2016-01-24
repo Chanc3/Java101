@@ -11,13 +11,29 @@ import java.util.Scanner;
 
 public class GradeEvaluation {
 
+	public static String grade(int gradeAv) {
+		String letterGrade = "ERROR";
+		if (gradeAv > 89) {
+			letterGrade = "A";
+		} else if (gradeAv > 79) {
+			letterGrade = "B";
+		} else if (gradeAv > 69) {
+			letterGrade = "C";
+		} else if (gradeAv > 59) {
+			letterGrade = "D";
+		} else if (gradeAv < 60) {
+			letterGrade = "F";
+		}
+		return letterGrade;
+	}
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String gradeValueString;
+		String gradeValueString, letter = "ERROR";
 		double gradeValueNum, gradeValueTotal = 0;
-		int numOfEntries = 0, gradeAverage;
+		int numOfEntries = 0, gradeAverage = 0;
 		Scanner keyboard = new Scanner(System.in);
 		do {
 			System.out.print("\nEnter grade value (Type \"exit\" to stop): ");
@@ -27,10 +43,9 @@ public class GradeEvaluation {
 				gradeValueNum = Double.parseDouble(gradeValueString);
 				gradeValueTotal = gradeValueNum + gradeValueTotal;
 				gradeAverage = (int) (gradeValueTotal / numOfEntries);
-				System.out.println("Your current average is: " + gradeAverage + "%");
+				letter = grade(gradeAverage);
 			}
+			System.out.println("Your current average is: " + letter + " " + gradeAverage + "%");
 		} while (!gradeValueString.equals("exit"));
-		keyboard.close();
-		System.exit(0);
 	}
 }
